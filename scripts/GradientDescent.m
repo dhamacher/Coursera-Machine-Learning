@@ -8,34 +8,44 @@ y = brainhead(:, [4]);
 x0 = ones(size(x), 1);
 
 # Feature Scaling
-X = horzcat([x0, (x-min(x))/(max(x)-min(x))]);
+# X = horzcat([x0, (x-min(x))/(max(x)-min(x))]);
+X = (x-min(x))/(max(x)-min(x));
 Y = (y-min(y))/(max(y)-min(y));
 
 
 # Set the parmaters to random values
-b = -500;
+b = 0;
 m = 0.5;
 
 # Set the learning rate
-alpha = 0.1;
+alpha = 0.01;
 
-theta = [b; m];
+delta_bound = 0.0001;
+delta = 1;
+
+theta = m;
 iteration = 1;
-results = zeroes(size(x), 2);
-J = 0;
+J = 1;
 
-while iteration != 100,
-  temp_b = b - alpha * J;
-  temp_m = m - alpha * J;
+while J >= delta_bound || iteration == 10,  
+  n = size(X,1);
+  predictions = X*theta;
+  temp_b = b - alpha * ((2/n)*sum((Y-predictions)));
+  temp_m = m - alpha * ((2/n)*sum((Y-predictions))*theta);
   b = temp_b;
   m = temp_m;
-  iteration = iteration + 1;
-  results(iteration, 1) = iteration;
-  results(iteration, 2) = J;
-  theta = [b; m];
-  J = costFunction(X, Y, theta);    
+  theta = temp_m;
+  iteration = iteration + 1;  
+  J = costFunction(X, Y, theta);  
 end;
+m
+b
+yp = X*m+b;
+plot(X,Y);
+hold on;
+plot(X, YP, 'color', 'r');
  
- plot(results(:, 1), results(:, 2))
+ 
+ 
  
  
