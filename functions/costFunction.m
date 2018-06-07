@@ -5,8 +5,8 @@ function J = costFunction(x, y, theta)
 % y is the class labels
 % theta is the paramter vector
 
-m = size(x,1); % number of training examples
+n = size(x,1); % number of training examples
 predictions = x*theta; % Prediction of hypothesis
 sqrErrors = (predictions-y).^2; % Squared errors
 
-J = 1/m * sum(sqrErrors);
+J = 1/n * sum(sqrErrors);
