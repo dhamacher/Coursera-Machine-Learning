@@ -25,7 +25,10 @@ sigma = zeros(1, size(X, 2));
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
+mean_x0 = mean(X[:,1])
+std_x0 = std(X[;, 1])
 
+for x 
 
 
 
