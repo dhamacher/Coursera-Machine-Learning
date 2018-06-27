@@ -22,7 +22,7 @@
 %  For this part of the exercise, you will need to change some
 %  parts of the code below for various experiments (e.g., changing
 %  learning rates).
-%
+%  
 
 %% Initialization
 
@@ -139,7 +139,7 @@ m = length(y);
 X = [ones(m, 1) X];
 
 % Calculate the parameters from the normal equation
-theta = normalEqn(X, y);
+#theta = normalEqn(X, y);
 
 % Display normal equation's result
 fprintf('Theta computed from the normal equations: \n');
@@ -149,7 +149,10 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+normF = featureNormalize([1650; 3]);
+norm = [ones(2, 1) normF];
+h = (theta' * norm);
+price = h % You should change this
 
 
 % ============================================================
