@@ -37,20 +37,16 @@ grad = zeros(size(theta));
 %
 
 
-sig = sigmoid(X * theta);
-cost = y.*log(sig)+(1-y).*log(1-sig);
-J = (-1/m)*sum(cost) + (lambda/(2*m))*sum(theta.^ 2);
-grad = (1 / m) .* (X' * (sig - y)) + (lambda / m) * theta;
+z = X * theta;
+h = sigmoid(z);
+cost = (-y)'*log(h)-(1-y)'*log(1-h);
+%Remove BIAS unit
+thetas = theta(2:length(theta), 1);
+J = ((1/m).*sum(cost)) + (lambda/(2*m)).*sum(thetas.^ 2);
 
-
-
-
-
-
-
-
-
-
+temp = theta;
+temp(1) = 0;
+grad = (1 / m) .* (X' * (h - y) + lambda.* theta);
 % =============================================================
 
 grad = grad(:);
