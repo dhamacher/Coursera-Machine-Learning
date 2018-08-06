@@ -41,7 +41,7 @@ z = X * theta;
 h = sigmoid(z);
 cost = (-y)'*log(h)-(1-y)'*log(1-h);
 
-%Used for the regularization term
+%Do not use theta_0 in the regularization term since it is the bias unit.
 thetas = theta(2:length(theta), 1);
 
 temp = theta; 
