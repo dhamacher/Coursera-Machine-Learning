@@ -21,15 +21,25 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Add Bias unit
+X = [ones(m, 1) X];
 
 
+% First layer (input)
+z1 = X * Theta1';
+h1 = sigmoid(z1);
+
+% Add bias unit
+h1 = [ones(m, 1) h1];
+
+% Second layer (hidden layer)
+z2 = h1 * Theta2';
+h2 = sigmoid(z2);
 
 
-
-
-
+% Third Layer (output)
+[pval, p] = max(h2, [], 2);
 
 % =========================================================================
-
 
 end
