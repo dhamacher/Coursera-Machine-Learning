@@ -21,26 +21,36 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 m = length(X);
-distance=zeros(K,1);
+##distance=zeros(K,1);
+##
+##for i=1:m 
+##  % training example
+##  sample=X(i, :); 
+##  for j=1:K            
+##    sampleCentroid=centroids(j, :);
+##    % Compute the norm
+##    sampleNorm =  sqrt(sample'*sample);
+##    sampleCentroidNorm = sqrt(sampleCentroid'*sampleCentroid);
+##    
+##    %Compute the distance
+##    distance(j) = (sum(sampleNorm(:))-sum(sampleCentroidNorm(:)))^2;
+##  endfor
+##  %Get the minimum value and index
+##  [val, index] = min(distance);
+##  
+##  %Assign the index of the minimum value
+##  idx(i) =  index(1, 1);
+##endfor
 
-for i=1:m 
-  % training example
-  sample=X(i, :); 
-  for j=1:K            
-    sampleCentroid=centroids(j, :);
-    % Compute the norm
-    sampleNorm =  sqrt(sample'*sample);
-    sampleCentroidNorm = sqrt(sampleCentroid'*sampleCentroid);
-    
-    %Compute the distance
-    distance(j) = (sum(sampleNorm(:))-sum(sampleCentroidNorm(:)))^2;
-  endfor
-  %Get the minimum value and index
-  [val, index] = min(distance);
-  
-  %Assign the index of the minimum value
-  idx(i) =  index(1, 1);
-endfor
+
+distances=zeros(m, K);
+
+for j=1:K            
+  sampleCentroid=centroids(j, :);
+  distance = sum(bsxfun(@minus, X, sampleCentroid).^2, 2);
+  distances(:, j) = distance
+endfor 
+
 
 % =============================================================
 
