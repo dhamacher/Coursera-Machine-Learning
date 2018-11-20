@@ -48,11 +48,12 @@ distances=zeros(m, K);
 for j=1:K            
   sampleCentroid=centroids(j, :);
   distance = sum(bsxfun(@minus, X, sampleCentroid).^2, 2);
-  distances(:, j) = distance
+  distances(:, j) = distance;
 endfor 
+
+[val idx] = min(distances, [], 2);
 
 
 % =============================================================
-
 end
 
