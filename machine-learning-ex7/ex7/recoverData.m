@@ -9,6 +9,8 @@ function X_rec = recoverData(Z, U, K)
 % You need to return the following variables correctly.
 X_rec = zeros(size(Z, 1), size(U, 1));
 
+m = length(Z);
+Um = length(U);
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the approximation of the data by projecting back
 %               onto the original space using the top K eigenvectors in U.
@@ -20,7 +22,12 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %
 %               Notice that U(j, 1:K) is a row vector.
 %               
-
+for i=1:m
+  v = Z(i, :)';
+  for j=1:Um    
+    X_rec(i, j) = v' * U(j, 1:K)';    
+  endfor  
+endfor
 
 
 % =============================================================
